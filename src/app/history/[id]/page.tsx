@@ -79,12 +79,11 @@ const OrderDetailPage = () => {
 
   return (
     <div className='w-full min-h-screen bg-[#FBF8F4] px-4 lg:px-16 pt-10 pb-10'>
-      {/* 💻 데스크탑 */}
       <div className='hidden lg:flex gap-8'>
         <div className='w-2/3 pr-8'>
-          <h1 className='text-3xl font-bold'>구매 내역 상세</h1>
+          <h1 className='text-3xl font-bold'>Purchased info</h1>
           <div className='mt-6 bg-none rounded-md p-6'>
-            <h2 className='text-xl font-bold mb-4'>구매 품목</h2>
+            <h2 className='text-xl font-bold mb-4'>Products</h2>
             <div className='border rounded-md max-h-[400px] overflow-y-auto bg-white'>
               {order?.items.map((item, index) => (
                 <div
@@ -100,43 +99,43 @@ const OrderDetailPage = () => {
                     <div>
                       <p className='text-sm text-gray-500'>{item.category}</p>
                       <p className='text-lg font-semibold'>{item.name}</p>
-                      <p className='text-sm font-semibold'>수량: {item.quantity}개</p>
+                      <p className='text-sm font-semibold'>Quantity: {item.quantity}ea</p>
                     </div>
                   </div>
                   <div className='flex flex-col items-end gap-1'>
-                    <p className=''>{item.price.toLocaleString()}원</p>
+                    <p className=''>{item.price.toLocaleString()}₩</p>
                     <p className='text-lg font-semibold'>
-                      {(item.price * item.quantity).toLocaleString()}원
+                      {(item.price * item.quantity).toLocaleString()}₩
                     </p>
                   </div>
                 </div>
               ))}
             </div>
             <div className='flex justify-end mt-4 text-base text-gray-500'>
-              배송비: {shippingFee.toLocaleString()}원
+              Shipping Fee : {shippingFee.toLocaleString()}₩
             </div>
             <div className='flex justify-end items-end mt-6 text-xl font-bold text-[#E67E22]'>
-              <span className='text-black'>총 {order?.items.length}건</span>
-              <span className='ml-2'>{order?.totalAmount.toLocaleString()} 원</span>
-              <span className='ml-2 text-sm text-gray-500 font-normal'>배송비포함</span>
+              <span className='text-black'>Total {order?.items.length} items</span>
+              <span className='ml-2'>{order?.totalAmount.toLocaleString()} ₩</span>
+              <span className='ml-2 text-sm text-gray-500 font-normal'></span>
             </div>
           </div>
         </div>
 
         <div className='w-1/3 px-6'>
           <div className='p-6 rounded-md'>
-            <h2 className='text-xl font-bold border-b-2 border-black-100'>요청 정보</h2>
+            <h2 className='text-xl font-bold border-b-2 border-black-100'>Request Info</h2>
             <p className='text-xl text-gray-400 mt-2'>
               {new Date(order?.requestDate || '').toLocaleDateString('ko-KR')}
             </p>
-            <label className='block mt-4 text-xl font-semibold text-black-400'>요청인</label>
+            <label className='block mt-4 text-xl font-semibold text-black-400'>Requester</label>
             <input
               type='text'
               value={order?.requester ?? ''}
               readOnly
               className='mt-1 w-full rounded-md border-2 text-2lg pl-[24px] pt-[14px] pb-[18px] pr-[24px] text-gray-500'
             />
-            <label className='block mt-4 text-xl font-semibold text-black-400'>요청 메시지</label>
+            <label className='block mt-4 text-xl font-semibold text-black-400'>Request message</label>
             <textarea
               value={order?.message ?? ''}
               readOnly
@@ -146,18 +145,18 @@ const OrderDetailPage = () => {
           </div>
 
           <div className='p-6 mt-6 rounded-md'>
-            <h2 className='text-xl font-bold border-b-2 border-black-100'>승인 정보</h2>
+            <h2 className='text-xl font-bold border-b-2 border-black-100'>Approval info</h2>
             <p className='text-xl text-gray-400 mt-2'>
               {new Date(order?.requestDate || '').toLocaleDateString('ko-KR')}
             </p>
-            <label className='block mt-4 text-xl font-semibold text-black-400'>담당자</label>
+            <label className='block mt-4 text-xl font-semibold text-black-400'>Handler</label>
             <input
               type='text'
               value={order?.handler ?? ''}
               readOnly
               className='mt-1 w-full rounded-md border-2 text-2lg pl-[24px] pt-[14px] pb-[18px] pr-[24px] text-gray-500'
             />
-            <label className='block mt-4 text-xl font-semibold text-black-400'>승인 메시지</label>
+            <label className='block mt-4 text-xl font-semibold text-black-400'>Approval message</label>
             <textarea
               value={order?.approvalMessage ?? ''}
               readOnly
@@ -172,15 +171,15 @@ const OrderDetailPage = () => {
 <div className='flex flex-col lg:hidden gap-6'>
   {/* 요청 정보 */}
   <div>
-    <h2 className='text-xl font-bold border-b-2 border-black-100'>요청 정보</h2>
+    <h2 className='text-xl font-bold border-b-2 border-black-100'>Request info</h2>
     <p className='mt-2 text-gray-500'>{order?.requestDate}</p>
-    <label className='block mt-4 text-lg font-semibold'>요청인</label>
+    <label className='block mt-4 text-lg font-semibold'>Requester</label>
     <input
       readOnly
       value={order?.requester ?? ''}
       className='w-full border px-4 py-3 rounded-md text-gray-500'
     />
-    <label className='block mt-4 text-lg font-semibold'>요청 메시지</label>
+    <label className='block mt-4 text-lg font-semibold'>Request message</label>
     <textarea
       readOnly
       value={order?.message ?? ''}
@@ -191,15 +190,15 @@ const OrderDetailPage = () => {
 
   {/* 승인 정보 */}
   <div>
-    <h2 className='text-xl font-bold border-b-2 border-black-100'>승인 정보</h2>
+    <h2 className='text-xl font-bold border-b-2 border-black-100'>Approval info</h2>
     <p className='mt-2 text-gray-500'>{order?.date}</p>
-    <label className='block mt-4 text-lg font-semibold'>담당자</label>
+    <label className='block mt-4 text-lg font-semibold'>Handler</label>
     <input
       readOnly
       value={order?.handler ?? ''}
       className='w-full border px-4 py-3 rounded-md text-gray-500'
     />
-    <label className='block mt-4 text-lg font-semibold'>승인 메시지</label>
+    <label className='block mt-4 text-lg font-semibold'>Approval message</label>
     <textarea
       readOnly
       value={order?.approvalMessage ?? ''}
@@ -210,7 +209,7 @@ const OrderDetailPage = () => {
 
   {/* 구매 품목 */}
   <div>
-    <h2 className='text-xl font-bold border-b'>구매 품목</h2>
+    <h2 className='text-xl font-bold border-b'>Products</h2>
     <div className='border rounded-md bg-white'>
       {order?.items.map((item, index) => (
         <div
@@ -226,25 +225,25 @@ const OrderDetailPage = () => {
             <div>
               <p className='text-sm text-gray-500'>{item.category}</p>
               <p className='font-semibold'>{item.name}</p>
-              <p className='text-sm'>수량: {item.quantity}개</p>
+              <p className='text-sm'>Quantity : {item.quantity}ea</p>
             </div>
           </div>
           <div className='text-right'>
-            <p>{item.price.toLocaleString()}원</p>
+            <p>{item.price.toLocaleString()}₩</p>
             <p className='font-semibold'>
-              {(item.price * item.quantity).toLocaleString()}원
+              {(item.price * item.quantity).toLocaleString()}₩
             </p>
           </div>
         </div>
       ))}
     </div>
     <div className='text-right text-sm text-gray-500 mt-2'>
-      배송비: {shippingFee.toLocaleString()}원
+      Shipping fee: {shippingFee.toLocaleString()}₩
     </div>
     <div className='flex justify-end mt-3 font-bold text-[#E67E22]'>
-      총 {order?.items.length}건 {order?.totalAmount.toLocaleString()}원{' '}
+      Total {order?.items.length} {order?.totalAmount.toLocaleString()}₩{' '}
       <span className='text-sm text-gray-500 ml-2 font-normal'>
-        배송비 포함
+        including shipping fee
       </span>
     </div>
   </div>
