@@ -9,13 +9,13 @@ const CartHeader = ({ selectAll, handleSelectAll }: CartHeaderProps) => {
         checked={selectAll}
         onChange={handleSelectAll}
       />
-      <span className='lg:hidden text-sm text-[#1F1F1F]'>전체선택</span>
+      <span className='lg:hidden text-sm text-[#1F1F1F]'>Select All</span>
       <div className='hidden lg:flex flex-row justify-between w-full text-center'>
-        <div className='w-[594px]'>상품정보</div>
+        <div className='w-[594px]'>Products</div>
         <div className='flex flex-row justify-between flex-1'>
-          <div className='w-[200px]'>수량</div>
-          <div className='w-[200px]'>주문 금액</div>
-          <div className='w-[200px]'>배송 정보</div>
+          <div className='w-[200px]'>Quantity</div>
+          <div className='w-[200px]'>Price</div>
+          <div className='w-[200px]'>Shipping</div>
         </div>
       </div>
     </div>

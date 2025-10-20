@@ -32,7 +32,7 @@ interface OrderTableProps {
   onReject?: (id: string) => void;
 }
 
-const headers = ['구매요청일', '상품정보', '주문 금액', '요청인', '비고'];
+const headers = ['Request Date', 'Products', 'Order Amount', 'Requester', 'Remarks'];
 
 const OrderTable: React.FC<OrderTableProps> = ({
   orders = [],
@@ -148,22 +148,22 @@ const OrderTable: React.FC<OrderTableProps> = ({
               </span>
               <span className='flex-1 text-center'>
                 {order.items && order.items.length > 0
-                  ? `${order.items[0].name}${order.items.length > 1 ? ` 외 ${order.items.length - 1}건` : ''}`
+                  ? `${order.items[0].name}${order.items.length > 1 ? ` and ${order.items.length - 1} more` : ''}`
                   : '상품 없음'}
                 <br />
                 <span className='text-sm text-gray-500'>
-                  총 수량:{' '}
+                  Quantity:{' '}
                   {order.items
                     ? order.items.reduce(
                         (sum, item) => sum + (item.quantity || 0),
                         0,
                       )
                     : 0}
-                  개
+                  ea
                 </span>
               </span>
               <span className='flex-1 text-center text-black-100'>
-                {(order.price ?? 0).toLocaleString()}원
+                {(order.price ?? 0).toLocaleString()}₩
               </span>
               <span className='flex-1 text-center text-black-100'>
                 {order.requester}
@@ -181,7 +181,7 @@ const OrderTable: React.FC<OrderTableProps> = ({
                   }`}
                   disabled={order.status !== 'PENDING'}
                 >
-                  반려
+                  Reject
                 </button>
                 <button
                   onClick={() => handleOpenModal(order.id)}
@@ -192,7 +192,7 @@ const OrderTable: React.FC<OrderTableProps> = ({
                   }`}
                   disabled={order.status !== 'PENDING'}
                 >
-                  승인
+                  Approve
                 </button>
               </div>
             </div>
@@ -206,7 +206,7 @@ const OrderTable: React.FC<OrderTableProps> = ({
             width={300}
             height={200}
           />
-          <p className='text-gray-500 mt-4'>신청된 요청이 없습니다</p>
+          <p className='text-gray-500 mt-4'>There is no request</p>
         </div>
       )}
 
@@ -236,8 +236,8 @@ const OrderTable: React.FC<OrderTableProps> = ({
                       : ''}
                   </p>
                   <p className='text-sm text-gray-500'>
-                    총 수량:{' '}
-                    {order.items.reduce((sum, i) => sum + i.quantity, 0)}개
+                    Quantity:{' '}
+                    {order.items.reduce((sum, i) => sum + i.quantity, 0)}ea
                   </p>
                 </div>
               </div>
@@ -256,7 +256,7 @@ const OrderTable: React.FC<OrderTableProps> = ({
                   }`}
                   disabled={order.status !== 'PENDING'}
                 >
-                  반려
+                  Reject
                 </button>
                 <button
                   onClick={() => handleOpenModal(order.id)}
@@ -267,7 +267,7 @@ const OrderTable: React.FC<OrderTableProps> = ({
                   }`}
                   disabled={order.status !== 'PENDING'}
                 >
-                  승인
+                  Approve
                 </button>
               </div>
             </div>
@@ -275,17 +275,17 @@ const OrderTable: React.FC<OrderTableProps> = ({
             {/* 하단 정보: 주문금액 / 구매요청일 / 요청인 */}
             <div className='mt-3 space-y-1 text-sm text-gray-600'>
               <div className='flex justify-between font-semibold border-b pb-2'>
-                <p className='text-black-400'>주문 금액</p>
+                <p className='text-black-400'>Total</p>
                 <p className='text-black-400'>
-                  {order.price.toLocaleString()}원
+                  {order.price.toLocaleString()} ₩
                 </p>
               </div>
               <div className='flex justify-between'>
-                <p className='text-gray-400'>구매요청일</p>
+                <p className='text-gray-400'>Request Date</p>
                 <p>{order.date || '-'}</p>
               </div>
               <div className='flex justify-between'>
-                <p className='text-gray-400'>요청인</p>
+                <p className='text-gray-400'>Requester</p>
                 <p>{order.requester || '-'}</p>
               </div>
             </div>

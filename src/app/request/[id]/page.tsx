@@ -216,10 +216,10 @@ const OrderDetailPage = () => {
       <div className='hidden lg:flex px-16'>
         {/* 왼쪽 품목 목록 */}
         <div className='w-2/3 pr-8'>
-          <h1 className='text-3xl font-bold'>구매 요청 상세</h1>
+          <h1 className='text-3xl font-bold'>Request Deatils</h1>
   
           <div className='mt-6 bg-white rounded-md p-6 border-2'>
-            <h2 className='text-xl font-bold mb-4'>요청 품목</h2>
+            <h2 className='text-xl font-bold mb-4'>Request Produts</h2>
   
             <div className='border rounded-md max-h-[400px] overflow-y-auto'>
               {order?.items.map((item, index) => (
@@ -237,14 +237,14 @@ const OrderDetailPage = () => {
                       <p className='text-sm text-gray-500'>{item.category}</p>
                       <p className='text-lg font-semibold'>{item.name}</p>
                       <p className='text-sm font-semibold'>
-                        수량: {item.quantity}개
+                        Quantity: {item.quantity} ea
                       </p>
                     </div>
                   </div>
                   <div className='flex flex-col items-end gap-1'>
-                    <p>{item.price.toLocaleString()}원</p>
+                    <p>{item.price.toLocaleString()}₩</p>
                     <p className='text-lg font-semibold'>
-                      {(item.price * item.quantity).toLocaleString()}원
+                      {(item.price * item.quantity).toLocaleString()}₩
                     </p>
                   </div>
                 </div>
@@ -254,14 +254,14 @@ const OrderDetailPage = () => {
   
           {/* 배송비 표기 */}
           <div className='flex justify-end mt-4 text-base text-gray-500'>
-            배송비: {shippingFee.toLocaleString()}원
+            Shipping Fee : {shippingFee.toLocaleString()}₩
           </div>
   
           <div className='flex justify-end items-end mt-6 text-xl font-bold text-[#E67E22]'>
-            <span className='text-black'>총 {order?.items.length}건</span>
-            <span className='ml-2'>{order?.totalAmount.toLocaleString()} 원</span>
+            <span className='text-black'>Total {order?.items.length} </span>
+            <span className='ml-2'>{order?.totalAmount.toLocaleString()} ₩</span>
             <span className='ml-2 text-sm text-gray-500 font-normal'>
-              배송비포함
+              Including Shipping Fee
             </span>
           </div>
   
@@ -276,7 +276,7 @@ const OrderDetailPage = () => {
               disabled={!order || order.status !== 'PENDING'}
               onClick={handleReject}
             >
-              요청 반려
+              Reject Request
             </button>
             <button
               className={`px-6 py-3 rounded-lg font-semibold w-[509px] h-[62px] transition-transform duration-200 ${
@@ -287,7 +287,7 @@ const OrderDetailPage = () => {
               disabled={!order || order.status !== 'PENDING' || isOverBudget}
               onClick={handleApprove}
             >
-              요청 승인
+              Approve Request
             </button>
           </div>
         </div>
@@ -297,13 +297,13 @@ const OrderDetailPage = () => {
           {/* 요청 정보 */}
           <div className='bg-#FBF8F4 rounded-md p-6'>
             <h2 className='text-xl font-bold border-b-2 border-black-100'>
-              요청 정보
+              Request Information
             </h2>
             <p className='text-xl text-gray-400 mt-2'>{order?.requestDate}</p>
   
             <div className='mt-2'>
               <label className='block text-xl font-semibold text-black-400'>
-                요청인
+                Requester
               </label>
               <input
                 type='text'
@@ -315,10 +315,10 @@ const OrderDetailPage = () => {
   
             <div className='mt-4'>
               <label className='block text-xl font-semibold text-black-400'>
-                요청 메시지
+                Request Message
               </label>
               <textarea
-                value={order?.message || '요청 메시지가 없습니다.'}
+                value={order?.message || 'No request message.'}
                 readOnly
                 rows={2}
                 className='mt-1 w-full rounded-md border-2 text-21g resize-none pl-[24px] pt-[14px] pb-[18px] pr-[24px] text-gray-500'
@@ -329,16 +329,16 @@ const OrderDetailPage = () => {
           {/* 예산 정보 */}
           <div className='bg-#FBF8F4 rounded-md p-6 mt-6'>
             <h2 className='text-xl font-bold border-b-2 border-black-100'>
-              예산 정보
+              Budget Information
             </h2>
   
             <div className='mt-4 space-y-4'>
               <div>
                 <label className='block font-semibold text-black-400 text-xl'>
-                  이번 달 지원예산
+                  This Month's Budget
                 </label>
                 <input
-                  value={budget.monthlyLimit.toLocaleString() + '원'}
+                  value={budget.monthlyLimit.toLocaleString() + '₩'}
                   readOnly
                   className='mt-1 w-full rounded-md border-2 px-4 py-3 text-gray-500'
                 />
@@ -346,10 +346,10 @@ const OrderDetailPage = () => {
   
               <div>
                 <label className='block font-semibold text-black-400 text-xl'>
-                  이번 달 남은 예산
+                  Remaining Budget This Month
                 </label>
                 <input
-                  value={budget.remaining.toLocaleString() + '원'}
+                  value={budget.remaining.toLocaleString() + '₩'}
                   readOnly
                   className={`mt-1 w-full rounded-md border-2 px-4 py-3 ${
                     isOverBudget ? 'border-red-500' : 'border-gray-200'
@@ -357,17 +357,17 @@ const OrderDetailPage = () => {
                 />
                 {isOverBudget && (
                   <p className='text-red-500 text-sm mt-1'>
-                    구매 금액이 남은 예산을 초과했습니다.
+                    The purchase amount exceeds the remaining budget.
                   </p>
                 )}
               </div>
   
               <div>
                 <label className='block font-semibold text-black-400 text-xl'>
-                  구매 후 예산
+                  Budget After Purchase
                 </label>
                 <input
-                  value={remainingAfterPurchase.toLocaleString() + '원'}
+                  value={remainingAfterPurchase.toLocaleString() + '₩'}
                   readOnly
                   className='mt-1 w-full rounded-md border-2 px-4 py-3 text-gray-500'
                 />
@@ -381,15 +381,15 @@ const OrderDetailPage = () => {
       <div className='flex flex-col gap-6 lg:hidden'>
         {/* 요청 정보 */}
         <div>
-          <h2 className='text-xl font-bold border-b-2 border-black-100'>요청 정보</h2>
+          <h2 className='text-xl font-bold border-b-2 border-black-100'>Request Info</h2>
           <p className='mt-2 text-gray-500'>{order?.requestDate}</p>
-          <label className='block mt-4 text-lg font-semibold'>요청인</label>
+          <label className='block mt-4 text-lg font-semibold'>Requester</label>
           <input
             readOnly
             value={order?.requester}
             className='w-full border px-4 py-3 rounded-md text-gray-500'
           />
-          <label className='block mt-4 text-lg font-semibold'>요청 메시지</label>
+          <label className='block mt-4 text-lg font-semibold'>Request Message</label>
           <textarea
             readOnly
             value={order?.message || '요청 메시지가 없습니다.'}
@@ -400,18 +400,18 @@ const OrderDetailPage = () => {
   
         {/* 예산 정보 */}
         <div>
-          <h2 className='text-xl font-bold border-b-2 border-black-100'>예산 정보</h2>
+          <h2 className='text-xl font-bold border-b-2 border-black-100'>Budget Info</h2>
           <div className='mt-4 space-y-4'>
             <div>
-              <label className='block font-semibold text-lg'>이번 달 지원예산</label>
+              <label className='block font-semibold text-lg'>This Month's Budget</label>
               <input
-                value={budget.monthlyLimit.toLocaleString() + '원'}
+                value={budget.monthlyLimit.toLocaleString() + '₩'}
                 readOnly
                 className='w-full border px-4 py-3 rounded-md text-gray-500'
               />
             </div>
             <div>
-              <label className='block font-semibold text-lg'>이번 달 남은 예산</label>
+              <label className='block font-semibold text-lg'>Remaining Budget This Month</label>
               <input
                 value={budget.remaining.toLocaleString() + '원'}
                 readOnly
@@ -421,14 +421,14 @@ const OrderDetailPage = () => {
               />
               {isOverBudget && (
                 <p className='text-red-500 text-sm mt-1'>
-                  구매 금액이 남은 예산을 초과했습니다.
+                  The purchase amount exceeds the remaining budget.
                 </p>
               )}
             </div>
             <div>
-              <label className='block font-semibold text-lg'>구매 후 예산</label>
+              <label className='block font-semibold text-lg'>Budget After Purchase</label>
               <input
-                value={remainingAfterPurchase.toLocaleString() + '원'}
+                value={remainingAfterPurchase.toLocaleString() + '₩'}
                 readOnly
                 className='w-full border px-4 py-3 rounded-md text-gray-500'
               />
@@ -438,7 +438,7 @@ const OrderDetailPage = () => {
   
         {/* 요청 품목 */}
         <div>
-          <h2 className='text-xl font-bold border-b'>요청 품목</h2>
+          <h2 className='text-xl font-bold border-b'>Request Products</h2>
           <div className='border rounded-md bg-white'>
             {order?.items.map((item, index) => (
               <div
@@ -454,24 +454,24 @@ const OrderDetailPage = () => {
                   <div>
                     <p className='text-sm text-gray-500'>{item.category}</p>
                     <p className='font-semibold'>{item.name}</p>
-                    <p className='text-sm'>수량: {item.quantity}개</p>
+                    <p className='text-sm'>Quantity: {item.quantity}ea</p>
                   </div>
                 </div>
                 <div className='text-right'>
-                  <p>{item.price.toLocaleString()}원</p>
+                  <p>{item.price.toLocaleString()}₩</p>
                   <p className='font-semibold'>
-                    {(item.price * item.quantity).toLocaleString()}원
+                    {(item.price * item.quantity).toLocaleString()}₩
                   </p>
                 </div>
               </div>
             ))}
           </div>
           <div className='text-right text-sm text-gray-500 mt-2'>
-            배송비: {shippingFee.toLocaleString()}원
+            Shipping Fee: {shippingFee.toLocaleString()}₩
           </div>
           <div className='flex justify-end mt-3 font-bold text-[#E67E22]'>
-            총 {order?.items.length}건 {order?.totalAmount.toLocaleString()}원{' '}
-            <span className='text-sm text-gray-500 ml-2 font-normal'>배송비 포함</span>
+            Total {order?.items.length} items {order?.totalAmount.toLocaleString()}₩{' '}
+            <span className='text-sm text-gray-500 ml-2 font-normal'>Including shipping fee</span>
           </div>
         </div>
   
@@ -486,7 +486,7 @@ const OrderDetailPage = () => {
             disabled={!order || order.status !== 'PENDING'}
             onClick={handleReject}
           >
-            요청 반려
+            Reject Request
           </button>
           <button
             className={`flex-1 h-[48px] rounded-lg font-bold text-white transition-transform duration-200 ${
@@ -497,7 +497,7 @@ const OrderDetailPage = () => {
             disabled={!order || order.status !== 'PENDING' || isOverBudget}
             onClick={handleApprove}
           >
-            요청 승인
+            Approve Request 
           </button>
         </div>
       </div>

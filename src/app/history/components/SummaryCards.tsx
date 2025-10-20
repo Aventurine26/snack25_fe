@@ -87,18 +87,18 @@ const SummaryCards = () => {
       {/* 이번 달 지출액 */}
       <Card className='w-full min-w-0 h-[210px]'>
         <CardHeader>
-          <CardTitle className='text-[24px]'>이번 달 지출액</CardTitle>
+          <CardTitle className='text-[24px]'>Monthly Spending</CardTitle>
           <p className='text-gray-400'>
             {summary.lastMonthSpending
               ? summary.monthlySpending - summary.lastMonthSpending > 0
-                ? `지난 달보다 ${(summary.monthlySpending - summary.lastMonthSpending).toLocaleString()}원 더 지출했어요`
-                : `지난 달보다 ${(summary.lastMonthSpending - summary.monthlySpending).toLocaleString()}원 덜 지출했어요`
-              : '지난 달이랑 비교 할 데이터가 없어요!'}
+                ? `You spent ${(summary.monthlySpending - summary.lastMonthSpending).toLocaleString()} ₩ more than last month`
+                : `You spent ${(summary.lastMonthSpending - summary.monthlySpending).toLocaleString()} ₩ less than last month`
+              : 'No comparison data from last month!'}
           </p>
         </CardHeader>
         <CardContent>
           <p className='text-[32px] font-bold'>
-            {summary.monthlySpending?.toLocaleString() ?? '0'}원
+            {summary.monthlySpending?.toLocaleString() ?? '0'} ₩
           </p>
         </CardContent>
       </Card>
@@ -106,37 +106,36 @@ const SummaryCards = () => {
       {/* 이번 달 남은 예산 */}
       <Card className='w-full min-w-0 h-[210px]'>
         <CardHeader>
-          <CardTitle className='text-[24px]'>이번 달 남은 예산</CardTitle>
+          <CardTitle className='text-[24px]'>This Month’s Remaining Budget</CardTitle>
           <p className='text-gray-400'>
             {typeof summary.lastMonthSpending === 'number'
               ? summary.lastMonthSpending - summary.monthlySpending > 0
-                ? `지난 달보다 ${(summary.lastMonthSpending - summary.monthlySpending).toLocaleString()}원 더 남았어요`
-                : `지난 달보다 ${(summary.monthlySpending - summary.lastMonthSpending).toLocaleString()}원 덜 남았어요`
-              : '지난 달이랑 비교 할 데이터가 없어요!'}
+                ? `You have ${(summary.lastMonthSpending - summary.monthlySpending).toLocaleString()} ₩ more left than last month`
+                : `You have ${(summary.monthlySpending - summary.lastMonthSpending).toLocaleString()} ₩ less left than last month`
+              : 'No comparison data from last month!'}
           </p>
         </CardHeader>
         <CardContent>
           <p className='text-[32px] font-bold'>
-            {summary.monthlyBudgetLeft?.toLocaleString() ?? '0'}원
-          </p>
+            {summary.monthlyBudgetLeft?.toLocaleString() ?? '0'} ₩ </p>
         </CardContent>
       </Card>
 
       {/* 올해 총 지출액 */}
       <Card className='w-full min-w-0 h-[210px]'>
         <CardHeader>
-          <CardTitle className='text-[24px]'>올해 총 지출액</CardTitle>
+          <CardTitle className='text-[24px]'>Total Spending This Year</CardTitle>
           <p className='text-gray-400'>
             {summary.lastYearSpending
               ? summary.yearlySpending - summary.lastYearSpending > 0
-                ? `${(summary.yearlySpending - summary.lastYearSpending).toLocaleString()}원 더 지출했어요`
-                : `${(summary.lastYearSpending - summary.yearlySpending).toLocaleString()}원 덜 지출했어요`
-              : '작년이랑 비교 할 데이터가 없어요!'}
+                ? `${(summary.yearlySpending - summary.lastYearSpending).toLocaleString()} ₩ more spent than last year`
+                : `${(summary.lastYearSpending - summary.yearlySpending).toLocaleString()} ₩ less spent than last year`
+              : 'No comparison data from last year!'} 
           </p>
         </CardHeader>
         <CardContent>
           <p className='text-[32px] font-bold'>
-            {summary.yearlySpending?.toLocaleString() ?? '0'}원
+            {summary.yearlySpending?.toLocaleString() ?? '0'} ₩
           </p>
         </CardContent>
       </Card>

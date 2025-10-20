@@ -28,15 +28,15 @@ const PurchaseItemList: React.FC<PurchaseItemListProps> = ({ items }) => {
             height={50}
           />
           <div className='flex-1'>
-            <p className='text-sm text-gray-600'>정량 · 단위상품</p>
+            <p className='text-sm text-gray-600'>Fixed Quantity · Unit Product</p>
             <p className='font-semibold'>{item.name}</p>
-            <p className='text-sm text-gray-500'>수량: {item.quantity}개</p>
+            <p className='text-sm text-gray-500'>Quantity: {item.quantity}ea</p>
           </div>
           <div className='text-right'>
             <p className='text-sm text-gray-500'>
-              {item.price.toLocaleString()}원
+              {item.price.toLocaleString()} ₩
             </p>
-            <p className='font-bold'>{item.total.toLocaleString()}원</p>
+            <p className='font-bold'>{item.total.toLocaleString()} ₩</p>
           </div>
         </div>
       ))}

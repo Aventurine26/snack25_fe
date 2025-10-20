@@ -9,9 +9,9 @@ const PurchaseSummary: React.FC<PurchaseSummaryProps> = ({
 }) => {
   return (
     <div className='flex justify-between items-center mt-4 px-4'>
-      <p className='text-gray-600'>총 {totalItems}건</p>
+      <p className='text-gray-600'>Total {totalItems}ea</p>
       <p className='text-orange-600 font-bold text-lg'>
-        {totalAmount.toLocaleString()}원
+        {totalAmount.toLocaleString()} ₩
       </p>
     </div>
   );

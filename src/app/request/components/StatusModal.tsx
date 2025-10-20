@@ -63,7 +63,7 @@ const StatusModal: React.FC<StatusModalProps> = ({
                 <div className='flex gap-4 items-center'>
                   <img
                     src={item.imageUrl || '/images/default.png'}
-                    alt={item.name || '상품'}
+                    alt={item.name || 'Product'}
                     className='w-14 h-14 rounded-md'
                   />
                   <div>
@@ -73,13 +73,13 @@ const StatusModal: React.FC<StatusModalProps> = ({
                     <p className='text-lg font-semibold'>
                       {item.name || '상품명 없음'}
                     </p>
-                    <p className='text-sm'>수량: {item.quantity}개</p>
+                    <p className='text-sm'>Quantity: {item.quantity} ea</p>
                   </div>
                 </div>
                 <div className='text-right'>
-                  <p>{item.price.toLocaleString()}원</p>
+                  <p>{item.price.toLocaleString()} ₩</p>
                   <p className='text-lg font-semibold'>
-                    {(item.price * item.quantity).toLocaleString()}원
+                    {(item.price * item.quantity).toLocaleString()} ₩
                   </p>
                 </div>
               </div>

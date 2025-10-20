@@ -41,7 +41,7 @@ export function HeaderMenu() {
         <DropdownMenuLabel>
           {
             <div className='flex items-center justify-between'>
-              <label className='font-bold text-xl'>메뉴</label>
+              <label className='font-bold text-xl'>Menu</label>
               <button
                 onClick={handleClose}
                 className='cursor-pointer'
@@ -59,29 +59,29 @@ export function HeaderMenu() {
         <DropdownMenuSeparator />
         <div className='flex flex-col gap-8 text-xl font-medium px-4'>
           <DropdownMenuItem asChild>
-            <Link href='/productList'>상품 리스트</Link>
+            <Link href='/productList'>Products</Link>
           </DropdownMenuItem>
           <DropdownMenuItem asChild>
-            <Link href='/request'>구매 요청 내역</Link>
+            <Link href='/request'>Purchase Request</Link>
           </DropdownMenuItem>
           <DropdownMenuItem asChild>
-            <Link href='/request'>구매 요청 관리</Link>
+            <Link href='/request'>Request Management</Link>
           </DropdownMenuItem>
           <DropdownMenuItem asChild>
-            <Link href='/history'>구매 내역 확인</Link>
+            <Link href='/history'>Purchase History</Link>
           </DropdownMenuItem>
           <DropdownMenuItem asChild>
-            <Link href='/productEntry'>상품 등록 내역</Link>
+            <Link href='/productEntry'>Registered Products</Link>
           </DropdownMenuItem>
           <DropdownMenuItem asChild>
-            <Link href='/management/users'>관리</Link>
+            <Link href='/management/users'>Users</Link>
           </DropdownMenuItem>
           <DropdownMenuItem asChild>
             <button
               onClick={logout}
               className='text-left'
             >
-              로그아웃
+              Logout
             </button>
           </DropdownMenuItem>
         </div>

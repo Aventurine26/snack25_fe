@@ -74,14 +74,14 @@ export default function UserHeader({ user }: { user: userInfo }) {
                 pathname.includes('/productList') && 'text-primary-400',
               )}
             >
-              상품 리스트
+              Products
             </Link>
             {user.role === 'USER' && (
               <NavItem
                 href='/my-request'
                 currentPath={pathname}
               >
-                구매 요청 내역
+                Purchase Requests
               </NavItem>
             )}
             {user.role !== 'USER' && (
@@ -90,14 +90,14 @@ export default function UserHeader({ user }: { user: userInfo }) {
                   href='/request'
                   currentPath={pathname}
                 >
-                  구매 요청 관리
+                  Request Management
                 </NavItem>
                
                 <NavItem
                   href='/history'
                   currentPath={pathname}
                 >
-                  구매 내역 확인
+                  Purchase History
                 </NavItem>
               </div>
             )}
@@ -105,14 +105,14 @@ export default function UserHeader({ user }: { user: userInfo }) {
               href='/productEntry'
               currentPath={pathname}
             >
-              상품 등록 내역
+              Registered Products
             </NavItem>
             {user.role === 'SUPERADMIN' && (
               <NavItem
                 href='/management/users'
                 currentPath={pathname}
               >
-                관리
+                Users
               </NavItem>
             )}
           </div>

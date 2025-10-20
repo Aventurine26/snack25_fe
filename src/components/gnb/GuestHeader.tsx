@@ -24,8 +24,8 @@ export default function GuestHeader() {
 
         {!isAuthPage && (
           <div className='text-white font-bold flex lt:w-[290px] tb:w-[205px] justify-around max-tb:hidden'>
-            <Link href='/auth/login'>로그인</Link>
-            <Link href='/auth/signup'>관리자 회원가입</Link>
+            <Link href='/auth/login'>Login</Link>
+            <Link href='/auth/signup'>Register as Admin</Link>
           </div>
         )}
       </header>

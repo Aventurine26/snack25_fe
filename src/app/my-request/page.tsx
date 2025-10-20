@@ -26,7 +26,7 @@ interface OrderItem {
 
 const MyRequestPage = () => {
   const [orders, setOrders] = useState<Order[]>([]);
-  const [sortOption, setSortOption] = useState('최신순');
+  const [sortOption, setSortOption] = useState('Latest'); 
   const [currentPage, setCurrentPage] = useState(1);
   const [pageSize] = useState(10);
   const [totalPage, setTotalPage] = useState(1);

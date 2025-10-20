@@ -112,7 +112,7 @@ export default function CategorySelect({
             } bg-white text-left`}
           >
             <span className='text-gray-400 text-[16px]'>
-              {selectedSub?.name || '소분류'}
+              {selectedSub?.name || 'Subcategory'}
             </span>
             <ChevronDownIcon className='w-4 h-4 text-orange-500' />
           </Listbox.Button>
@@ -123,7 +123,7 @@ export default function CategorySelect({
           >
             {!selectedCategoryId ? (
               <li className='px-4 py-2 text-gray-400 cursor-not-allowed'>
-                대분류를 먼저 선택해주세요
+                Please select a main category first
               </li>
             ) : (
               subCategories.map((sub) => (

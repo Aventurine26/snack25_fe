@@ -19,7 +19,7 @@ const ClientPage = () => {
   const currentPage = pageParam ? parseInt(pageParam) : 1;
 
   const [orders, setOrders] = useState<Order[]>([]);
-  const [sortOption, setSortOption] = useState('최신순');
+  const [sortOption, setSortOption] = useState('Latest'); 
   const [totalPage, setTotalPage] = useState(1);
 
   const pageSize = 10;
@@ -27,11 +27,11 @@ const ClientPage = () => {
   useEffect(() => {
     const fetchOrders = async () => {
       const sortQuery =
-        sortOption === '최신순'
+        sortOption === 'Latest' 
           ? 'latest'
-          : sortOption === '높은금액순'
+          : sortOption === 'HighPrice'
             ? 'highPrice'
-            : sortOption === '낮은금액순'
+            : sortOption === 'LowPrice'
               ? 'lowPrice'
               : 'latest';
 
@@ -48,10 +48,10 @@ const ClientPage = () => {
         requestDate: item.createdAt?.slice(0, 10) ?? '-',
         requester: item.requestedBy?.name || '-',
         handler: item.updatedBy?.name || '-',
-        price: item.totalAmount?.toLocaleString() + '원' || '0원',
+        price: item.totalAmount?.toLocaleString() + '₩' || '0 ₩',
         status: item.status,
         items: item.orderItems?.map((it: any) => ({
-          name: it.product?.name || '상품 없음',
+          name: it.product?.name || 'None',
           quantity: it.quantity || 0,
           imageUrl: it.product?.imageUrl ? it.product.imageUrl : '/img/product/default.png',
         })) || [],
@@ -67,7 +67,7 @@ const ClientPage = () => {
   return (
     <div className='w-full px-8 lg:px-16 pt-10 pb-10 bg-[#FBF8F4] min-h-screen'>
       <div className='w-full h-[114px] flex justify-between items-center'>
-        <h1 className='text-[42px] font-bold'>구매 내역 확인</h1>
+        <h1 className='text-[42px] font-bold'>Purchase History</h1>
       </div>
 
       <div className='space-y-6'>
@@ -82,13 +82,13 @@ const ClientPage = () => {
             </DropdownMenuTrigger>
             <DropdownMenuContent className='text-gray-500'>
               <DropdownMenuItem onClick={() => setSortOption('최신순')}>
-                최신순
+                Latest
               </DropdownMenuItem>
               <DropdownMenuItem onClick={() => setSortOption('높은금액순')}>
-                높은금액순
+                High Price
               </DropdownMenuItem>
               <DropdownMenuItem onClick={() => setSortOption('낮은금액순')}>
-                낮은금액순
+                Low Price
               </DropdownMenuItem>
             </DropdownMenuContent>
           </DropdownMenu>

@@ -24,12 +24,12 @@ interface HistoryTableProps {
 }
 
 const headers = [
-  '구매승인일',
-  '상품정보',
-  '주문 금액',
-  '요청인',
-  '담당자',
-  '구매요청일',
+  'Approval Date',
+  'Product info',
+  'Order Amount',
+  'Requester',
+  'Handler',
+  'Request Date',
 ];
 
 const HistoryTable: React.FC<HistoryTableProps> = ({ orders = [] }) => {
@@ -41,7 +41,7 @@ const HistoryTable: React.FC<HistoryTableProps> = ({ orders = [] }) => {
       <div className='flex flex-col items-center justify-center py-10'>
         <Image
           src='/img/order/order-nothing-admin-md.svg'
-          alt='구매 내역 없음'
+          alt='no orders'
           width={300}
           height={200}
         />
@@ -77,10 +77,10 @@ const HistoryTable: React.FC<HistoryTableProps> = ({ orders = [] }) => {
             <span className='flex-1 text-center'>
               {order.items.length > 0
                 ? `${order.items[0].name}${order.items.length > 1 ? ` 외 ${order.items.length - 1}건` : ''}`
-                : '상품 없음'}
+                : 'No products'}
               <br />
               <span className='text-sm text-gray-500'>
-                총 수량: {order.items.reduce((sum, i) => sum + i.quantity, 0)}개
+                Total Amount: {order.items.reduce((sum, i) => sum + i.quantity, 0)} ea
               </span>
             </span>
             <span className="flex-1 text-center text-black-100">{order.price}</span>
@@ -88,7 +88,7 @@ const HistoryTable: React.FC<HistoryTableProps> = ({ orders = [] }) => {
               {order.requester}
               {order.requester === order.handler && (
             <span className="text-orange-400 border border-orange-200 px-2 py-[2px] text-sm rounded-md bg-orange-100 font-semibold">
-              즉시 구매
+              Immediate Purchase
             </span>
             )}
             </span>
@@ -123,10 +123,10 @@ const HistoryTable: React.FC<HistoryTableProps> = ({ orders = [] }) => {
             <div className="flex flex-col justify-center">
               <p className="text-[15px] font-medium">
                 {order.items[0]?.name}
-                {order.items.length > 1 ? ` 외 ${order.items.length - 1}건` : ''}
+                {order.items.length > 1 ? ` and ${order.items.length - 1}ea` : ''}
               </p>
               <p className="text-sm text-gray-500">
-                총 수량: {order.items.reduce((sum, i) => sum + i.quantity, 0)}개
+                Total Amount: {order.items.reduce((sum, i) => sum + i.quantity, 0)}ea
               </p>
             </div>
           </div>
@@ -137,24 +137,24 @@ const HistoryTable: React.FC<HistoryTableProps> = ({ orders = [] }) => {
         {/* 하단: 라벨 - 값 좌우 정렬 */}
         <div className="mt-6 space-y-2  text-gray-600">
           <div className="flex justify-between font-semibold border-b py-2 ">
-            <p className="text-black-400 ">주문 금액</p>
+            <p className="text-black-400 ">Total Amount</p>
             <p className="text-black-400 ">{order.price}</p>
           </div>
           <div className="flex justify-between text-sm">
-            <p className="text-gray-400">구매승인일</p>
+            <p className="text-gray-400">Approval Date</p>
             <p>{order.date || '-'}</p>
           </div>
           <div className="flex justify-between text-sm">
-            <p className="text-gray-400 ">구매요청일</p>
+            <p className="text-gray-400 ">Request Date</p>
             <p>{order.requestDate || '-'}</p>
           </div>
           <div className="flex justify-between text-sm">
-            <p className="text-gray-400">요청인</p>
+            <p className="text-gray-400">Requester</p>
             <span className="flex justify-between text-sm items-center">
               <span className="flex items-center gap-1">
                 {order.requester === order.handler && (
                   <span className="text-orange-400 border border-orange-200 px-2 py-[2px] text-sm rounded-md bg-orange-100 font-semibold">
-                    즉시 구매
+                    Immediate Purchase
                   </span>
                 )}
                 {order.requester}
@@ -162,7 +162,7 @@ const HistoryTable: React.FC<HistoryTableProps> = ({ orders = [] }) => {
           </span> 
           </div>
           <div className="flex justify-between text-sm">
-            <p className="text-gray-400">담당자</p>
+            <p className="text-gray-400">Handler</p>
             <p>{order.handler || '-'}</p>
           </div>
         </div>

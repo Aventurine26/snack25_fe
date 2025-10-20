@@ -24,7 +24,8 @@ export default function useCategory() {
       }
       const parents: Category[] = await fetchApi('/categories/parents', {
         method: 'GET',
-      });
+      }) as Category[];
+      
       if (process.env.NODE_ENV === 'development') {
         console.log('상위 카테고리 패칭 완료:', parents);
       }
@@ -44,10 +45,10 @@ export default function useCategory() {
       if (!isHydrated || !isAuth) {
         return [];
       }
-      const sub: Category[] = await fetchApi(
+      const sub = await fetchApi(
         `/categories/parents/${parentId}`,
         { method: 'GET' },
-      );
+      ) as Category[];
       if (process.env.NODE_ENV === 'development') {
         console.log('초기 하위 카테고리 패칭 완료:', sub);
       }
@@ -68,7 +69,7 @@ export default function useCategory() {
 
     const fetchName = async () => {
       try {
-        const data: IProducts[] = await fetchApi('/categories/all');
+        const data: IProducts[] = await fetchApi('/categories/all') as IProducts[];
         if (!isMounted) {
           return;
         }

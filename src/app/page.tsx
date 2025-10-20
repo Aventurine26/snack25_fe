@@ -30,7 +30,7 @@ export default function Home() {
               className='self-start rounded-full lt:py-4 lt:px-8 px-3 py-2 bg-gray-50 font-bold text-center keep-all text-primary-400 border-4 border-primary-300 max-[744px]:hidden whitespace-nowrap mb-10 lg:text-[26px]
             '
             >
-              흩어진 간식 구매처를 통합하고, 기수별 지출을 똑똑하게 관리하세요
+              Unify your scattered snack purchases and manage spending by group intelligently.
             </p>
           </div>
         </div>

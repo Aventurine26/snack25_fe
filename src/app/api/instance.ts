@@ -1,7 +1,7 @@
 export async function fetchApi(
   url: string,
   options: RequestInit = {},
-): Promise<any> {
+): Promise<unknown> {
   // 환경변수에서 API_URL을 가져오거나, 기본값을 사용
   const baseUrl = process.env.NEXT_PUBLIC_API_URL;
   const fullUrl = `${baseUrl}${url}`;
@@ -16,19 +16,41 @@ export async function fetchApi(
       credentials: 'include',
     });
 
-    const data = await res.json();
+    const responseText = await res.text();
+    let data: unknown = null;
+
+    if (responseText) {
+      try {
+        data = JSON.parse(responseText);
+      } catch {
+        data = responseText;
+      }
+    }
 
     if (!res.ok) {
       console.error('❗️서버 에러 응답 전체:', data);
 
-      const message = Array.isArray(data.message)
-        ? data.message[0]
-        : data.message ||
-          data.error || // NestJS의 기본 오류 구조
-          '서버 오류가 발생했습니다';
+      let message = '서버 오류가 발생했습니다';
 
-      const error = new Error(message);
-      (error as any).response = {
+      if (typeof data === 'string') {
+        message = data;
+      } else if (typeof data === 'object' && data !== null) {
+        const payload = data as {
+          message?: string | string[];
+          error?: string;
+        };
+
+        message = Array.isArray(payload.message)
+          ? payload.message[0]
+          : payload.message || payload.error || message;
+      }
+
+      type ErrorWithResponse = Error & {
+        response?: { data: unknown; status: number };
+      };
+
+      const error = new Error(message) as ErrorWithResponse;
+      error.response = {
         data,
         status: res.status,
       };

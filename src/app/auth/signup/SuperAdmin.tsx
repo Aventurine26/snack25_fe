@@ -82,14 +82,14 @@ export function SuperAdmin() {
     if (value.trim() === '') {
       const match = placeholder.match(/^(.*?(?:을|를))/);
       const fieldLabel = match ? match[0] : placeholder;
-      newError = { isError: true, msg: `${fieldLabel} 입력해주세요` };
+      newError = { isError: true, msg: `Please enter ${fieldLabel} ` };
     } else if (name === 'name') {
       // 이름 필드: 숫자나 특수문자가 포함된 경우 에러 처리
       // 정규표현식은 영어, 한글, 공백만 허용합니다.
       if (/[^a-zA-Z가-힣\s]/.test(value.trim())) {
         newError = {
           isError: true,
-          msg: '이름에는 숫자나 특수문자를 포함할 수 없습니다',
+          msg: 'The name cannot contain numbers or special characters',
         };
       }
     } else if (name === 'password' || name === 'validatePassword') {
@@ -102,7 +102,7 @@ export function SuperAdmin() {
         newPasswords.password &&
         value !== newPasswords.password
       ) {
-        newError = { isError: true, msg: '비밀번호가 일치하지 않습니다' };
+        newError = { isError: true, msg: 'Passwords do not match' };
       }
     }
 
@@ -110,7 +110,7 @@ export function SuperAdmin() {
     if (name === 'bizno' && value.trim() !== '') {
       const cleanBizno = value.replace(/-/g, '');
       if (cleanBizno.length !== 10) {
-        newError = { isError: true, msg: '사업자 번호는 10자리여야 합니다' };
+        newError = { isError: true, msg: 'The business registration number must be 10 digits' };
       }
     }
 
@@ -124,7 +124,7 @@ export function SuperAdmin() {
       setEmailError(
         emailRegex.test(value)
           ? initError
-          : { isError: true, msg: '유효한 이메일을 입력하세요' },
+          : { isError: true, msg: 'Please enter a valid email' },
       );
     }
   };
@@ -153,14 +153,14 @@ export function SuperAdmin() {
   const handleSubmit = async () => {
     // 모든 필드에 값이 입력되었는지 체크
     if (Object.values(form).some((value) => !value.trim())) {
-      alert('모든 항목을 입력해주세요!');
+      alert('Please fill in the fields!');
       return;
     }
 
     // 이름에 숫자나 특수문자가 포함되어 있는지 체크 (영어, 한글, 공백만 허용)
     if (/[^a-zA-Z가-힣\s]/.test(form.name.trim())) {
       showCustomToast({
-        label: '이름에는 숫자나 특수문자를 포함할 수 없습니다',
+        label: 'The name cannot contain numbers or special characters',
         variant: 'error',
         onClick: () => {},
       });
@@ -170,7 +170,7 @@ export function SuperAdmin() {
     // 이메일 유효성 검사
     if (emailError.isError || !emailRegex.test(form.email)) {
       showCustomToast({
-        label: '유효한 이메일을 입력하세요',
+        label: 'Please enter a valid email',  
         variant: 'error',
         onClick: () => {},
       });
@@ -180,7 +180,7 @@ export function SuperAdmin() {
     // 비밀번호와 비밀번호 확인 값이 일치하는지 확인
     if (form.password !== form.validatePassword) {
       showCustomToast({
-        label: '비밀번호가 일치하지 않습니다',
+        label: 'Passwords do not match',
         variant: 'error',
         onClick: () => {},
       });
@@ -191,7 +191,7 @@ export function SuperAdmin() {
     const cleanBizno = getCleanBizno(form.bizno);
     if (cleanBizno.length !== 10) {
       showCustomToast({
-        label: '사업자 번호는 하이픈을 제외하고 10자리여야 합니다',
+        label: 'The business registration number must be 10 digits',
         variant: 'error',
         onClick: () => {},
       });
@@ -306,10 +306,10 @@ export function SuperAdmin() {
     <div className='flex flex-col mt-[20px] gap-[16px]  tb:gap-[36px]'>
       <div className='pr-[10px]'>
         <h2 className='text-[24px] tb:text-[32px] font-semibold tb:mb-[12px]'>
-          기업 담당자 회원가입
+          Super Admin Sign Up
         </h2>
         <span className='text-[var(--color-gray-600)] text-[14px] tb:text-[20px]'>
-          *그룹 내 유저는 기업 담당자의 초대 메일을 통해 가입이 가능합니다.
+          Please register your company as a Super Admin user.
         </span>
       </div>
 
@@ -318,41 +318,41 @@ export function SuperAdmin() {
         className='flex flex-col gap-[16px] tb:gap-[36px]'
       >
         {renderInputField(
-          '이름(기업 담당자)',
+          'Name (Company Representative)',
           'name',
-          '이름을 입력해주세요',
+          'Please enter your name',
           form.name,
         )}
         {renderInputField(
-          '이메일',
+          'Email',
           'email',
-          '이메일을 입력해주세요',
+          'Please enter your email',
           form.email,
         )}
         {renderPasswordField(
-          '비밀번호',
+          'Password',
           'password',
-          '비밀번호를 입력해주세요',
+          'Please enter your password',
           form.password,
           passwordVisibility.password,
         )}
         {renderPasswordField(
-          '비밀번호 확인',
+          'Confirm Password',
           'validatePassword',
-          '비밀번호를 다시 한 번 입력해주세요',
+          'Please confirm your password',
           form.validatePassword,
           passwordVisibility.validatePassword,
         )}
         {renderInputField(
-          '회사명',
+          'Company Name',
           'company',
-          '회사명을 입력해주세요',
+          'Please enter your company name',
           form.company,
         )}
         {renderInputField(
-          '사업자 번호',
+          'Business Registration Number(10 digits)',
           'bizno',
-          '사업자 번호를 입력해주세요',
+          'Please enter your business registration number',
           form.bizno,
         )}
         <Button
@@ -362,24 +362,24 @@ export function SuperAdmin() {
           onSubmit={async () => await handleSubmit()}
           disabled={!isFormValid}
         >
-          시작하기
+          Register
         </Button>
       </Form>
       <div className='flex gap-[4px] mx-auto tb:mt-[8px]'>
         <span className='text-[12px] tb:text-[20px] text-[var(--color-gray-600)]'>
-          이미 계정이 있으신가요?
+          Already have an account?
         </span>
         <Link
           href='/auth/login'
           className='text-[12px] tb:text-[20px] font-[600] text-[var(--color-primary-400)] focus:underline hover:underline decoration-1 underline-offset-2'
         >
-          로그인
+          Login
         </Link>
       </div>
       <Modal
         open={isModalOpen}
         onClose={() => setIsModalOpen(false)}
-        confirmText='로그인'
+        confirmText='Go to Login'
         hideCancel={true}
         onConfirm={() => router.replace('/auth/login')}
       >
@@ -390,15 +390,15 @@ export function SuperAdmin() {
             width={240}
             height={140}
           />
-          <h2 className='mt-[24px] text-[24px] font-[700]'>회원가입 성공</h2>
+          <h2 className='mt-[24px] text-[24px] font-[700]'>Register success!</h2>
           <div className='gap-[6px] flex flex-col items-center text-[20px] font-[500] text-[#ABABAB]'>
             <span className=''>
-              {form.name}님, 회원가입을 진심으로 축하드립니다.
+              {form.name},Congratulations on signing up!.
             </span>
             <div className='flex items-center gap-[15px]'>
-              <span className=''>회사명: {form.company}</span>
+              <span className=''>Company: {form.company}</span>
               <div>|</div>
-              <span className=''>직급: {form.role}</span>
+              <span className=''>Role: {form.role}</span>
             </div>
           </div>
         </div>

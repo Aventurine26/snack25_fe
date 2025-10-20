@@ -27,7 +27,11 @@ export function useOrder() {
         label: '주문이 완료되었습니다!',
         variant: 'success',
       });
-      router.push(`/order/${res.id}`);
+      if (res?.id) {
+        router.push(`/order/${res.id}`);
+      } else {
+        router.push('/order');
+      }
       return true;
     } catch (error) {
       showCustomToast({

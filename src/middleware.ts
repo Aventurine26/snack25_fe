@@ -13,6 +13,8 @@ export async function middleware(req: NextRequest) {
   const res = NextResponse.next();
 
   if (!token && rtoken) {
+    console.log('accessToken:', token);
+    console.log('refreshToken:', rtoken);
     const cookieValue = 'refreshToken=' + rtoken;
     const data = await fetch(
       process.env.NEXT_PUBLIC_API_URL + '/auth/refresh',
@@ -24,7 +26,50 @@ export async function middleware(req: NextRequest) {
         },
         credentials: 'include',
       },
-    );
+    );    if (!token && rtoken) {
+      console.log('accessToken:', token);
+      console.log('refreshToken:', rtoken);
+    
+      const cookieValue = 'refreshToken=' + rtoken;
+      try {
+        const data = await fetch(
+          process.env.NEXT_PUBLIC_API_URL + '/auth/refresh',
+          {
+            method: 'POST',
+            headers: {
+              'Content-Type': 'application/json',
+              Cookie: cookieValue,
+            },
+            credentials: 'include',
+          },
+        );
+    
+        console.log('API 응답 상태:', data.status);
+        const responseText = await data.text();
+        console.log('API 응답 본문:', await data.text());
+    
+        if (!data.ok) {
+          console.error('API 요청 실패:', data.status, responseText);
+          return res;
+        }
+    
+        const newToken = JSON.parse(responseText);
+        console.log('새로운 토큰:', newToken);
+    
+        res.cookies.set('accessToken', newToken.token, {
+          httpOnly: true,
+          secure: process.env.NODE_ENV === 'production',
+          sameSite: 'lax',
+          maxAge: 1000 * 60 * 60 * 24,
+          path: '/',
+        });
+        console.log('액세스 토큰 설정 완료');
+      } catch (error) {
+        console.error('API 호출 중 에러:', error);
+      }
+    
+      return res;
+    }
     const newToken = await data.json();
 
     res.cookies.set('accessToken', newToken.token, {

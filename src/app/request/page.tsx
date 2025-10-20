@@ -34,7 +34,7 @@ interface Order {
 const PurchaseRequestPage = () => {
   const router = useRouter();
   const [orders, setOrders] = useState<Order[]>([]);
-  const [sortOption, setSortOption] = useState('최신순');
+  const [sortOption, setSortOption] = useState('Latest');
   const [currentPage, setCurrentPage] = useState(1);
   const [totalPage, setTotalPage] = useState(1);
 
@@ -146,7 +146,7 @@ const PurchaseRequestPage = () => {
   return (
     <div className='w-full px-8 lg:px-16 pt-10 pb-10 bg-[#FBF8F4] min-h-screen'>
       <div className='w-full h-[114px] flex justify-between items-center'>
-        <h1 className='text-[42px] font-bold'>구매 요청 관리</h1>
+        <h1 className='text-[42px] font-bold'>Request Management</h1>
       </div>
 
       <div className='space-y-6'>
@@ -159,13 +159,13 @@ const PurchaseRequestPage = () => {
             </DropdownMenuTrigger>
             <DropdownMenuContent className='text-gray-500'>
               <DropdownMenuItem onClick={() => setSortOption('최신순')}>
-                최신순
+                Newest
               </DropdownMenuItem>
               <DropdownMenuItem onClick={() => setSortOption('높은금액순')}>
-                높은금액순
+                High price
               </DropdownMenuItem>
               <DropdownMenuItem onClick={() => setSortOption('낮은금액순')}>
-                낮은금액순
+                Low price
               </DropdownMenuItem>
             </DropdownMenuContent>
           </DropdownMenu>

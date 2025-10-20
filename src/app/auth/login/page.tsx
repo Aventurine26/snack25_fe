@@ -68,7 +68,7 @@ export default function Login() {
 
     if (result.status === 200) {
       showCustomToast({
-        label: '로그인 성공했습니다.',
+        label: 'Login successful!',
         variant: 'success',
       });
       router.replace('/');
@@ -87,7 +87,7 @@ export default function Login() {
     <>
       <div className='pr-[10px]'>
         <h2 className='text-[24px] tb:text-[32px] font-semibold text-center'>
-          로그인
+          Login
         </h2>
       </div>
       <Form
@@ -97,10 +97,10 @@ export default function Login() {
         <div className='flex flex-col gap-[4px]'>
           <Input
             tabIndex={1}
-            titleClassName='이메일'
+            titleClassName='Email'
             name='email'
             type='email'
-            placeholder='이메일을 입력해주세요'
+            placeholder='Enter your email'
             onChange={handleChange}
             onBlur={handleEmailBlur}
             value={form.email}
@@ -115,11 +115,11 @@ export default function Login() {
 
         <div className='flex flex-col gap-[4px]'>
           <Input
-            titleClassName='비밀번호'
+            titleClassName='Password'
             name='password'
             tabIndex={2}
             type={passwordVisibility ? 'text' : 'password'}
-            placeholder='비밀번호를 입력해주세요'
+            placeholder='Enter your password'
             onChange={handleChange}
             onBlur={handleNullBlur}
             value={form.password}
@@ -153,17 +153,17 @@ export default function Login() {
           onSubmit={async () => await handleSubmit()}
           disabled={!isFormValid}
         >
-          로그인
+          Login
         </Button>
         <div className='flex gap-[4px] mx-auto tb:mt-[8px]'>
           <span className='text-[12px] tb:text-[20px] text-[var(--color-gray-600)]'>
-            기업 담당자이신가요?
+            Are you a comanpy user?
           </span>
           <Link
             href='/auth/signup'
             className='text-[12px] tb:text-[20px] font-[600] text-[var(--color-primary-400)] focus:underline hover:underline decoration-1 underline-offset-2'
           >
-            가입하기
+            Register
           </Link>
         </div>
       </Form>
