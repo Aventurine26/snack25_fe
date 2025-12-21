@@ -1,8 +1,16 @@
-export async function fetchApi(
+type ApiErrorPayload = {
+  message?: string | string[];
+  error?: string;
+};
+
+type ErrorWithResponse = Error & {
+  response?: { data: unknown; status: number };
+};
+
+export async function fetchApi<T = unknown>(
   url: string,
   options: RequestInit = {},
-): Promise<unknown> {
-  // 환경변수에서 API_URL을 가져오거나, 기본값을 사용
+): Promise<T> {
   const baseUrl = process.env.NEXT_PUBLIC_API_URL;
   const fullUrl = `${baseUrl}${url}`;
 
@@ -35,30 +43,18 @@ export async function fetchApi(
       if (typeof data === 'string') {
         message = data;
       } else if (typeof data === 'object' && data !== null) {
-        const payload = data as {
-          message?: string | string[];
-          error?: string;
-        };
-
+        const payload = data as ApiErrorPayload;
         message = Array.isArray(payload.message)
           ? payload.message[0]
           : payload.message || payload.error || message;
       }
 
-      type ErrorWithResponse = Error & {
-        response?: { data: unknown; status: number };
-      };
-
       const error = new Error(message) as ErrorWithResponse;
-      error.response = {
-        data,
-        status: res.status,
-      };
+      error.response = { data, status: res.status };
       throw error;
     }
 
-    // console.log('data', data);
-    return data;
+    return data as T;
   } catch (err) {
     console.error('❌ [API 호출 실패]', fullUrl, err);
     throw err;
