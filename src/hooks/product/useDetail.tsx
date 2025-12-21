@@ -22,7 +22,9 @@ export const useDetail = (id: string) => {
     setIsLoading(true);
     try {
       const url = `/products/${id}`;
-      const data = await fetchApi(url, { method: 'GET' });
+      const data = await fetchApi<IProducts>(url, { method: 'GET' }) ;
+      setIsLoading(false);
+      return data;
       if (process.env.NODE_ENV === 'development') {
         console.log('상품 상세 조회 성공:', data);
       }
@@ -32,6 +34,7 @@ export const useDetail = (id: string) => {
       if (process.env.NODE_ENV === 'development') {
         console.log('상품 상세 조회 실패:', err);
       }
+      throw err;
     }
   };
 
@@ -39,7 +42,7 @@ export const useDetail = (id: string) => {
     const fetchDetail = async () => {
       try {
         const data = await fetchProductDetail(id);
-        setData(data);
+        setData(data as IProducts);
       } catch (err) {
         throw new Error('상세 데이터 패칭 오류 발생');
       }
@@ -68,7 +71,7 @@ export const useDetail = (id: string) => {
         body: JSON.stringify(requestBody),
       });
 
-      if (!res || res.error) {
+      if (!res || (res as any).error) {
         if (process.env.NODE_ENV === 'development') {
           console.error('❌ 수정 실패 응답:', res);
         }
