@@ -110,7 +110,7 @@ export default function ProductList() {
           return <EmptyImage />;
         }
 
-        const { items, hasNextPage, hasPrevPage } = data;
+        const { items, hasNextPage, hasPrevPage } = data as any;
 
         if (scrollRef.current) {
           window.scrollTo({ top: scrollRef.current });
